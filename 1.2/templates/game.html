@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de RPG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Jogando como: {{ player_name }}</h1>
+    <form action="/action" method="post">
+        <input type="hidden" name="player_name" value="{{ player_name }}">
+        <label for="action">Escolha uma ação:</label>
+        <select id="action" name="action">
+            <option value="1">Treinar Ataque</option>
+            <option value="2">Treinar Agilidade</option>
+            <option value="3">Descansar (cura vida)</option>
+            <option value="4">Fugir</option>
+            <option value="5">Caminhar (explorar o mapa)</option>
+        </select>
+        <button type="submit">Executar Ação</button>
+    </form>
+
+    <div id="result">
+        <h2>Resultado:</h2>
+        <p id="result_text">Aqui aparecerá o resultado da ação.</p>
+    </div>
+
+    <script>
+        // Ação assíncrona para enviar a requisição e mostrar o resultado sem recarregar a página
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            fetch('/action', {
+                method: 'POST',
+                body: new FormData(form),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result_text').textContent = data.result;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

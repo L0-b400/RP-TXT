@@ -1,0 +1,11 @@
+{
+    "L": {
+        "vida": 20,
+        "força": 104,
+        "inteligência": 1,
+        "sorte": 1,
+        "agilidade": 30,
+        "status": "normal",
+        "debuff_turns": 0
+    }
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de RPG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Bem-vindo ao RPG de Texto!</h1>
+    <form action="/start_game" method="post">
+        <label for="player_name">Escolha o nome do jogador:</label>
+        <input type="text" id="player_name" name="player_name" required>
+        <button type="submit">Iniciar Jogo</button>
+    </form>
+    <h2>Jogadores Existentes:</h2>
+    <ul>
+        {% for player in players %}
+        <li>{{ player }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
